@@ -9,11 +9,11 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal;
     private float speed = 4f;
     private float jumpingPower = 14f;
-    private bool isFacingRight = true;
+    public bool isFacingRight = true;
     private bool isInWater = false;
     private float momentumX = 0f;
 
-    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] public Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     Animator animator;
@@ -88,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Flipping the direction the player faces
     private void Flip()
     {
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
@@ -104,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
-    // Check if the player is in water
+    // Entering and exiting water
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 4)
