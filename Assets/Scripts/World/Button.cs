@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Button : MonoBehaviour
@@ -7,6 +8,11 @@ public class Button : MonoBehaviour
     bool isOnButton = false;
     [SerializeField] GameObject textPrefab;
     [SerializeField] Texture2D texture;
+
+    [Header("Text")]
+    [SerializeField] string boxName;
+    [SerializeField] string boxText;
+
     private GameObject textboxGO;
     private bool isTextVisible = false;
     private Canvas canvas;
@@ -31,7 +37,7 @@ public class Button : MonoBehaviour
             Debug.Log("pressed circle");
             textboxGO = Instantiate<GameObject>(textPrefab, canvas.transform);
             TextBox textboxScript = textboxGO.GetComponent<TextBox>();
-            textboxScript.DisplayText("This is a test of the text.", "Test Name", texture);
+            textboxScript.DisplayText(boxText, boxName, texture);
             Time.timeScale = 0;
             isTextVisible = true;
         }

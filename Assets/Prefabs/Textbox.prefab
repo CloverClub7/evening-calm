@@ -278,7 +278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1493726047926921196}
   - component: {fileID: 5882362523179763317}
-  - component: {fileID: 4067985704221598292}
+  - component: {fileID: 7134016743548373604}
   m_Layer: 5
   m_Name: Avatar
   m_TagString: Untagged
@@ -302,8 +302,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.01885851, y: 0.06565173}
   m_AnchorMax: {x: 0.22851783, y: 0.900885}
-  m_AnchoredPosition: {x: 0.00012207031, y: -0.000061035156}
-  m_SizeDelta: {x: -0.000008583069, y: -0.00009059906}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -0.00000047684}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5882362523179763317
 CanvasRenderer:
@@ -313,7 +313,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6680070684602908514}
   m_CullTransparentMesh: 1
---- !u!114 &4067985704221598292
+--- !u!114 &7134016743548373604
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -351,6 +351,7 @@ GameObject:
   - component: {fileID: 6649252589546168392}
   - component: {fileID: 6547755428855480275}
   - component: {fileID: 4637397226105345520}
+  - component: {fileID: 653881867512728721}
   m_Layer: 5
   m_Name: Textbox
   m_TagString: Untagged
@@ -400,3 +401,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a607b4a7f514542a6de392da22940a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  texture: {fileID: 0}
+--- !u!114 &653881867512728721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6748437389936556311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.7294118}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1

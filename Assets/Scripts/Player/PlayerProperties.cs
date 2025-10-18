@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerProperties : MonoBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
+    GameObject healthDisplayGO;
+    HealthDisplay healthDisplay;
     private float playerHealth = 5f;
     private float playerMaxHealth = 5f;
 
@@ -18,6 +20,9 @@ public class PlayerProperties : MonoBehaviour
     void Start()
     {
         Debug.Log("Player health: " + playerHealth);
+
+        healthDisplayGO = GameObject.Find("HealthDisplay");
+        healthDisplay = healthDisplayGO.GetComponent<HealthDisplay>();
     }
 
     // Update is called once per frame
@@ -29,6 +34,7 @@ public class PlayerProperties : MonoBehaviour
             GameObject bullet = Instantiate<GameObject>(bulletPrefab);
             bullet.transform.position = new Vector3(transform.position.x, transform.position.y - 0.2f, transform.position.z);
         }
+        healthDisplay.health = playerHealth;
     }
 
     void OnCollisionEnter2D(Collision2D collide)
@@ -39,7 +45,7 @@ public class PlayerProperties : MonoBehaviour
         if (collidedWith.CompareTag("Enemy"))
         {
             EnemyClass enemy = collidedWith.GetComponent<EnemyClass>();
-            playerHealth -= enemy.GetDamage();
+            playerHealth -= enemy.enemyDamage;
             Debug.Log("Player health decreased, Playerhealth " + playerHealth);
         }
     }
