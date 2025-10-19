@@ -10,6 +10,7 @@ public class ChaseSOBase : ScriptableObject
     protected Rigidbody2D rigidbody;
 
     protected Transform playerTransform;
+    private CircleCollider2D chaseRadius;
 
     public virtual void Initialize(GameObject gameObject, EnemyClass enemy)
     {

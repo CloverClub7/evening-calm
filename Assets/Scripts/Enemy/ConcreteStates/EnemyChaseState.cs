@@ -19,8 +19,6 @@ public class EnemyChaseState : EnemyState
     {
         base.EnterState();
         enemy.chaseBaseInstance.DoEnterLogic();
-
-        Debug.Log("Slime entered chase state.");
     }
     
     public override void ExitState()

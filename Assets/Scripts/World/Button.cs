@@ -25,17 +25,18 @@ public class Button : MonoBehaviour
     {
         isOnButton = false;
     }
-    
+
     void Awake()
     {
         canvas = FindObjectOfType<Canvas>();
     }
+
     void Update()
     {
         if (isOnButton && Input.GetButtonDown("Down") && !isTextVisible)
         {
             Debug.Log("pressed circle");
-            textboxGO = Instantiate<GameObject>(textPrefab, canvas.transform);
+            textboxGO = Instantiate(textPrefab, canvas.transform);
             TextBox textboxScript = textboxGO.GetComponent<TextBox>();
             textboxScript.DisplayText(boxText, boxName, texture);
             Time.timeScale = 0;
@@ -46,8 +47,7 @@ public class Button : MonoBehaviour
         {
             Destroy(textboxGO);
             Time.timeScale = 1;
-            // If want to interact again, uncomment
-            // isTextVisible = false;
+            isTextVisible = false;
         }
     }
 }

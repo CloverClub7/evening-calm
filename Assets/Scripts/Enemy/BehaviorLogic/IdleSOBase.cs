@@ -24,7 +24,7 @@ public class IdleSOBase : ScriptableObject
     public virtual void DoFrameUpdateLogic()
     {
         // Change to chase state if player enters chase trigger
-        if (enemy.isChasing)
+        if (enemy.isInChaseRadius)
         {
             enemy.stateMachine.ChangeState(enemy.chaseState);
         }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface ITriggerCheck
 {
-    bool isChasing { get; set; }
-    bool isAttacking { get; set; }
+    bool isInChaseRadius { get; set; }
+    bool isInAttackRadius { get; set; }
 
     void SetChasing(bool isChasing);
 

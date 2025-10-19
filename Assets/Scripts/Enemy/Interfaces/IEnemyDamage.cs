@@ -5,11 +5,9 @@ using UnityEngine;
 
 public interface IEnemyDamage
 {
-    float maxHealth { get;  set;}
+    [SerializeField] float maxHealth { get; set; }
+    [SerializeField] float enemyDamage { get; set;}
     float currentHealth { get; set;}
-    float enemyDamage { get; set;}
-
     void Damage(float damageAmount);
-
     void Die();
 }

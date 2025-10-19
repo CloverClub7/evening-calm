@@ -12,7 +12,7 @@ public class PlayerProperties : MonoBehaviour
     private float playerMaxHealth = 5f;
 
     // Rudimentary inventory
-    bool hasPistol = false;
+    public bool hasPistol = false;
     bool hasKey = false;
     int pistolLevel = 1;
 
@@ -31,7 +31,7 @@ public class PlayerProperties : MonoBehaviour
         // Fire the pistol if it is in inventory
         if (hasPistol && Input.GetButtonDown("Fire1"))
         {
-            GameObject bullet = Instantiate<GameObject>(bulletPrefab);
+            GameObject bullet = Instantiate(bulletPrefab);
             bullet.transform.position = new Vector3(transform.position.x, transform.position.y - 0.2f, transform.position.z);
         }
         healthDisplay.health = playerHealth;

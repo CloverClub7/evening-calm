@@ -30,11 +30,11 @@ public class SlimeIdle : IdleSOBase
     public override void DoPhysicsLogic()
     {
         base.DoPhysicsLogic();
-        // Change to chase state if player enters chase trigger
-        if (enemy.isChasing)
+
+        // Change to chase state if player enters chase radius
+        if (enemy.isInChaseRadius)
         {
             enemy.stateMachine.ChangeState(enemy.chaseState);
-            Debug.Log("Slime attemping to change state.");
         }
     }
 

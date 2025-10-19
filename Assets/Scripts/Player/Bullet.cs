@@ -12,6 +12,8 @@ public class Bullet : MonoBehaviour
     float velo;
     float limit = 16f;
     float startPositionX;
+    float damage = 3f;
+    public float level = 1f;
 
     // Set direction of movement for a created bullet
     void Start()
@@ -38,6 +40,24 @@ public class Bullet : MonoBehaviour
     {
         // Delete the bullet after a certain distance
         if (transform.position.x > startPositionX + limit || transform.position.x < startPositionX - limit)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject collidedWith = collision.gameObject;
+
+        // If the bullet hits an enemy take damage
+        if (collidedWith.CompareTag("Enemy"))
+        {
+            EnemyClass enemy = collidedWith.GetComponent<EnemyClass>();
+            enemy.Damage(damage);
+        }
+
+        // Bullet despawns after colliding with anything except for the player
+        if (!collidedWith.CompareTag("Player"))
         {
             Destroy(this.gameObject);
         }

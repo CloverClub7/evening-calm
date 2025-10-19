@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyClass : MonoBehaviour, IEnemyDamage, IEnemyMovement, ITriggerCheck
+public class EnemyClass : MonoBehaviour, IEnemyMovement, ITriggerCheck//, IEnemyDamage
 {
+    [Header("Health and Damage")]
     // Damage variables
-    [SerializeField] public float maxHealth { get; set; }
-    [SerializeField] public float enemyDamage { get; set; }
-    public float currentHealth { get; set; }
+    public float maxHealth;
+    public float enemyDamage;
+    private float currentHealth;
 
     // Movement variables
     public Rigidbody2D rigidBody { get; set; }
@@ -21,8 +22,8 @@ public class EnemyClass : MonoBehaviour, IEnemyDamage, IEnemyMovement, ITriggerC
     public EnemyAttackState attackState { get; set; }
 
     // Trigger check variables
-    public bool isChasing { get; set; }
-    public bool isAttacking { get; set; }
+    public bool isInChaseRadius { get; set; }
+    public bool isInAttackRadius { get; set; }
 
     // ScriptableObject variables
     [Header("Enemy States")]
@@ -117,12 +118,12 @@ public class EnemyClass : MonoBehaviour, IEnemyDamage, IEnemyMovement, ITriggerC
     // Check distance from player
     public void SetChasing(bool isChasing)
     {
-        this.isChasing = isChasing;
+        this.isInChaseRadius = isChasing;
     }
 
     public void SetAttacking(bool isAttacking)
     {
-        this.isAttacking = isAttacking;
+        this.isInAttackRadius = isAttacking;
     }
 
 }
