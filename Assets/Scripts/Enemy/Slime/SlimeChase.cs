@@ -32,6 +32,12 @@ public class SlimeChase : ChaseSOBase
     public override void DoFrameUpdateLogic()
     {
         base.DoFrameUpdateLogic();
+        
+    }
+
+    public override void DoPhysicsLogic()
+    {
+        base.DoPhysicsLogic();
 
         // Jump towards player
         if (isGrounded() && jumpTimer > timeBetweenJumps)
@@ -57,11 +63,10 @@ public class SlimeChase : ChaseSOBase
         }
 
         jumpTimer += Time.deltaTime;
-    }
 
-    public override void DoPhysicsLogic()
-    {
-        base.DoPhysicsLogic();
+        // Flip the slime if needed
+        enemy.Flip(rigidbody.velocity);
+
     }
 
     public override void Initialize(GameObject gameObject, EnemyClass enemy)

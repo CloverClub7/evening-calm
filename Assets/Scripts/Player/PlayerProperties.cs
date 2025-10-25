@@ -9,8 +9,10 @@ public class PlayerProperties : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
     GameObject healthDisplayGO;
     HealthDisplay healthDisplay;
-    private float playerHealth = 5f;
-    private float playerMaxHealth = 10f;
+
+    [Header("Health")]
+    public float playerHealth = 5f;
+    public float playerMaxHealth = 10f;
 
     // Variables for invincibility after taking damage
     private float invincibilityTime = 2f;
@@ -18,10 +20,11 @@ public class PlayerProperties : MonoBehaviour
     private bool isInvincible = false;
 
     // Rudimentary inventory
+    [Header("Inventory")]
     public bool hasPistol = false;
     public GameObject pistolSprite;
-    bool hasKey = false;
-    int pistolLevel = 1;
+    public float pistolDamageMultiplier = 1;
+    public float pistolRangeMultiplier = 1;
 
     // Textbox for player death
     [Header("Death Textbox")]
@@ -36,8 +39,6 @@ public class PlayerProperties : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Player health: " + playerHealth);
-
         healthDisplayGO = GameObject.Find("HealthDisplayTMP");
         healthDisplay = healthDisplayGO.GetComponent<HealthDisplay>();
 
@@ -59,7 +60,7 @@ public class PlayerProperties : MonoBehaviour
         healthDisplay.health = playerHealth;
 
         // Reload the scene (restart) when the death textbox is showing
-        if (isTextVisible && Input.GetButtonDown("Jump"))
+        if (isTextVisible && Input.GetButtonDown("Space"))
         {
             Time.timeScale = 1;
             SceneManager.LoadScene("SampleScene");
@@ -77,16 +78,34 @@ public class PlayerProperties : MonoBehaviour
         } 
     }
 
-    void OnTriggerEnter2D(Collider2D collide)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject collidedWith = collide.gameObject;
+        GameObject collidedWith = collision.gameObject;
 
         // When colliding with an enemy, only take damage when not invincible
         if (collidedWith.CompareTag("Enemy") && !isInvincible)
         {
             EnemyClass enemy = collidedWith.GetComponent<EnemyClass>();
             playerHealth -= enemy.enemyDamage;
-            Debug.Log("Player health decreased, Playerhealth " + playerHealth);
+
+            if (playerHealth < 1)
+            {
+                playerDie();
+            }
+
+            isInvincible = true;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject collidedWith = collision.gameObject;
+
+        // When colliding with a spike, take damage when not invincible
+        if (collidedWith.CompareTag("DangerousObject") && !isInvincible)
+        {
+            Spike spike = collidedWith.GetComponent<Spike>();
+            playerHealth -= spike.Damage;
 
             if (playerHealth < 1)
             {

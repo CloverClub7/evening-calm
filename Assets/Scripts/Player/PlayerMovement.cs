@@ -25,8 +25,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
-
         if (isInWater)
         {
             Swim();
@@ -35,13 +33,17 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
         }
+        
         animator.SetBool("isJumping", !IsGrounded() && !isInWater);
         animator.SetBool("isInWater", isInWater);
+
         Flip();
     }
 
     private void FixedUpdate()
     {
+        horizontal = Input.GetAxisRaw("Horizontal");
+
         if (IsGrounded())
         {
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
@@ -50,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(momentumX + horizontal * speed * 0.5f, rb.velocity.y);
         }
+
+        // Let the animator know the player is moving
         animator.SetFloat("xVelocity", Math.Abs(rb.velocity.x));
     }
 

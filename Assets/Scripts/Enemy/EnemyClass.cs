@@ -38,6 +38,9 @@ public class EnemyClass : MonoBehaviour, IEnemyMovement, ITriggerCheck//, IEnemy
 
     private void Awake()
     {
+        currentHealth = maxHealth;
+        rigidBody = GetComponent<Rigidbody2D>();
+
         // Create instances of state classes for each enemy
         idleBaseInstance = Instantiate(idleBase);
         chaseBaseInstance = Instantiate(chaseBase);
@@ -48,12 +51,6 @@ public class EnemyClass : MonoBehaviour, IEnemyMovement, ITriggerCheck//, IEnemy
         idleState = new EnemyIdleState(this, stateMachine);
         chaseState = new EnemyChaseState(this, stateMachine);
         attackState = new EnemyAttackState(this, stateMachine);
-    }
-
-    private void Start()
-    {
-        currentHealth = maxHealth;
-        rigidBody = GetComponent<Rigidbody2D>();
 
         idleBaseInstance.Initialize(gameObject, this);
         chaseBaseInstance.Initialize(gameObject, this);

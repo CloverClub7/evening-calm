@@ -20,7 +20,10 @@ public class Door : MonoBehaviour
     // Detect if the player is within a door
     void OnTriggerEnter2D(Collider2D collision)
     {
-        isOnDoor = true;
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isOnDoor = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)
