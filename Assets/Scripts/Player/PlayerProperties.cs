@@ -10,10 +10,16 @@ public class PlayerProperties : MonoBehaviour
     GameObject healthDisplayGO;
     HealthDisplay healthDisplay;
     private float playerHealth = 5f;
-    private float playerMaxHealth = 5f;
+    private float playerMaxHealth = 10f;
+
+    // Variables for invincibility after taking damage
+    private float invincibilityTime = 2f;
+    private float invincibilityTimer = 0f;
+    private bool isInvincible = false;
 
     // Rudimentary inventory
     public bool hasPistol = false;
+    public GameObject pistolSprite;
     bool hasKey = false;
     int pistolLevel = 1;
 
@@ -32,10 +38,13 @@ public class PlayerProperties : MonoBehaviour
     {
         Debug.Log("Player health: " + playerHealth);
 
-        healthDisplayGO = GameObject.Find("HealthDisplay");
+        healthDisplayGO = GameObject.Find("HealthDisplayTMP");
         healthDisplay = healthDisplayGO.GetComponent<HealthDisplay>();
 
         canvas = GameObject.FindObjectOfType<Canvas>();
+
+        pistolSprite = GameObject.Find("Pistol");
+        pistolSprite.SetActive(false);
     }
 
     // Update is called once per frame
@@ -54,23 +63,37 @@ public class PlayerProperties : MonoBehaviour
         {
             Time.timeScale = 1;
             SceneManager.LoadScene("SampleScene");
-        }        
+        }       
+
+        // Timer for invincibility
+        if (isInvincible)
+        {
+            invincibilityTimer += Time.deltaTime;
+            if (invincibilityTimer > invincibilityTime)
+            {
+                isInvincible = false;
+                invincibilityTimer = 0;
+            }
+        } 
     }
 
     void OnTriggerEnter2D(Collider2D collide)
     {
         GameObject collidedWith = collide.gameObject;
 
-        // When colliding with an enemy
-        if (collidedWith.CompareTag("Enemy"))
+        // When colliding with an enemy, only take damage when not invincible
+        if (collidedWith.CompareTag("Enemy") && !isInvincible)
         {
             EnemyClass enemy = collidedWith.GetComponent<EnemyClass>();
             playerHealth -= enemy.enemyDamage;
             Debug.Log("Player health decreased, Playerhealth " + playerHealth);
 
-            if (playerHealth < 1) {
+            if (playerHealth < 1)
+            {
                 playerDie();
             }
+
+            isInvincible = true;
         }
     }
 

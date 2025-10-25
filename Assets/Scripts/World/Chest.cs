@@ -53,6 +53,7 @@ public class Chest : MonoBehaviour
         {
             Destroy(textboxGO);
             Time.timeScale = 1;
+            playerProperties.pistolSprite.SetActive(true);
             // If want to interact again, uncomment
             // isTextVisible = false;
         }

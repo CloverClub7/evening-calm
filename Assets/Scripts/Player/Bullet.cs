@@ -5,41 +5,40 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    Rigidbody2D rb;
-    Rigidbody2D playerRb;
-    bool direction;
-    float speed = 8f;
-    float velo;
-    float limit = 16f;
-    float startPositionX;
-    float damage = 3f;
-    public float level = 1f;
+    public float Limit = 4f;    // Limit distance of bullet
+    public float Damage = 3f;   // How much damage the bullet deals
+    private float speed = 11f;  // Speed of the bullet
+    private float velocity;     // Velocity of the bullet
+    private float startPositionX;   // The starting position of the bullet
 
     // Set direction of movement for a created bullet
     void Start()
     {
-        rb = gameObject.GetComponent<Rigidbody2D>();
+        Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
+
         GameObject player = GameObject.FindWithTag("Player");
         PlayerMovement playerMove = player.GetComponent<PlayerMovement>();
-        direction = playerMove.isFacingRight;
+
+        bool isTravellingRight = playerMove.isFacingRight;
+
         startPositionX = transform.position.x;
 
-        if (direction)
+        if (isTravellingRight)
         {
-            velo = speed;
+            velocity = speed;
         }
         else
         {
-            velo = -speed;
+            velocity = -speed;
         }
 
-        rb.velocity = new Vector2(velo, rb.velocity.y);
+        rb.velocity = new Vector2(velocity, rb.velocity.y);
     }
 
     void Update()
     {
         // Delete the bullet after a certain distance
-        if (transform.position.x > startPositionX + limit || transform.position.x < startPositionX - limit)
+        if (transform.position.x > startPositionX + Limit || transform.position.x < startPositionX - Limit)
         {
             Destroy(this.gameObject);
         }
@@ -53,7 +52,14 @@ public class Bullet : MonoBehaviour
         if (collidedWith.CompareTag("Enemy"))
         {
             EnemyClass enemy = collidedWith.GetComponent<EnemyClass>();
-            enemy.Damage(damage);
+            enemy.Damage(Damage);
+        }
+
+        // If the bullet hits a breakable block
+        if (collidedWith.CompareTag("BreakableBlock"))
+        {
+            BreakableBlock block = collidedWith.GetComponent<BreakableBlock>();
+            block.Damage(Damage);
         }
 
         // Bullet despawns after colliding with anything except for the player

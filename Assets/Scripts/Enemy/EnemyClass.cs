@@ -93,6 +93,7 @@ public class EnemyClass : MonoBehaviour, IEnemyMovement, ITriggerCheck//, IEnemy
 
     }
 
+    // Flip direction if needed
     public void Flip(Vector2 velocity)
     {
         if (isFacingRight && velocity.x < 0f || !isFacingRight && velocity.x > 0)
@@ -101,7 +102,7 @@ public class EnemyClass : MonoBehaviour, IEnemyMovement, ITriggerCheck//, IEnemy
             Vector2 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
-        }   
+        }
     }
 
     // State machine functions
