@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4560374371011018205}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttackRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 3464704716191808452}
   - component: {fileID: 8215813424740874343}
   - component: {fileID: 5389068307382248980}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemySlimePrefab
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 3546388629214242975}
   - component: {fileID: 8776126944896146529}
   - component: {fileID: 6167002491978734186}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ChaseRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}

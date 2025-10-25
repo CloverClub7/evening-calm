@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Check2Text : MonoBehaviour
+public class LastDoor : MonoBehaviour
 {
     private bool isOnButton = false;
-
-    public bool isOn = false;
+    private bool openDoor = false;
 
     [SerializeField] GameObject textPrefab;
     [SerializeField] Texture2D texture;    
@@ -16,16 +15,17 @@ public class Check2Text : MonoBehaviour
     [SerializeField] string boxTextFalse;
     [SerializeField] string boxTextTrue;
 
-    [Header("Linked Check Vars")]
-    [SerializeField] GameObject toCheck1;
-    [SerializeField] GameObject toCheck2;
-    private VarText varText1;
-    private VarText varText2;
+    [Header("Linked Check Var")]
+    [SerializeField] GameObject toCheck;
+    private Check2Text checkThis;
 
     private GameObject textboxGO;
     private bool isTextVisible = false;
-    private Canvas canvas;    
+    private Canvas canvas;
 
+    [Header("Attached Door")]
+    [SerializeField] GameObject door;
+    Transform doorTransform;
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -42,8 +42,9 @@ public class Check2Text : MonoBehaviour
     void Awake()
     {
         canvas = FindObjectOfType<Canvas>();
-        varText1 = toCheck1.GetComponent<VarText>();
-        varText2 = toCheck2.GetComponent<VarText>();
+        checkThis = toCheck.GetComponent<Check2Text>();
+
+        doorTransform = door.GetComponent<Transform>();
     }
 
     void Update()
@@ -53,10 +54,10 @@ public class Check2Text : MonoBehaviour
             textboxGO = Instantiate(textPrefab, canvas.transform);
             TextBox textboxScript = textboxGO.GetComponent<TextBox>();
 
-            if (varText1.isOperating && varText2.isOperating)
+            if (checkThis.isOn)
             {
                 textboxScript.DisplayText(boxTextTrue, boxName, texture);
-                isOn = true;
+                openDoor = true;
             }
             else
             {
@@ -71,6 +72,14 @@ public class Check2Text : MonoBehaviour
             Destroy(textboxGO);
             Time.timeScale = 1;
             isTextVisible = false;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (openDoor)
+        {
+            doorTransform.Translate(0, 0.2f, 0);
         }
     }
 }
