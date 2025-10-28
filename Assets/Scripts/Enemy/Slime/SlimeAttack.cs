@@ -6,10 +6,6 @@ using UnityEngine;
 public class SlimeAttack : AttackSOBase
 {
     [SerializeField] private float speed = 1f;
-    public override void DoAnimationTriggerEventLogic(EnemyClass.AnimationTriggerType triggerType)
-    {
-        base.DoAnimationTriggerEventLogic(triggerType);
-    }
 
     public override void DoEnterLogic()
     {

@@ -23,5 +23,4 @@ public class AttackSOBase : ScriptableObject
     public virtual void DoExitLogic() { }
     public virtual void DoFrameUpdateLogic() { }
     public virtual void DoPhysicsLogic() { }
-    public virtual void DoAnimationTriggerEventLogic(EnemyClass.AnimationTriggerType triggerType) { }
 }

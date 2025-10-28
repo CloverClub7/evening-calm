@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+// A chest that can have a choice of item inside
 public class Chest : MonoBehaviour
 {
     private bool isOnChest = false;
@@ -35,7 +36,7 @@ public class Chest : MonoBehaviour
         {
             isOnChest = true;
         }
-        
+
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -86,7 +87,7 @@ public class Chest : MonoBehaviour
                     Debug.Log("You forgot to put an item in this chest");
                     break;
             }
-            
+
             Time.timeScale = 0;
             isTextVisible = true;
         }

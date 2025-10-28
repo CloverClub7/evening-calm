@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Checks if two terminals are active
 public class Check2Text : MonoBehaviour
 {
     private bool isOnButton = false;
@@ -9,7 +10,7 @@ public class Check2Text : MonoBehaviour
     public bool isOn = false;
 
     [SerializeField] GameObject textPrefab;
-    [SerializeField] Texture2D texture;    
+    [SerializeField] Texture2D texture;
 
     [Header("Text")]
     [SerializeField] string boxName;
@@ -24,7 +25,7 @@ public class Check2Text : MonoBehaviour
 
     private GameObject textboxGO;
     private bool isTextVisible = false;
-    private Canvas canvas;    
+    private Canvas canvas;
 
     void OnTriggerEnter2D(Collider2D collision)
     {

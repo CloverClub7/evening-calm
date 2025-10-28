@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
+// Updates the health display UI
 public class HealthDisplay : MonoBehaviour
 {
     public float health = 0;

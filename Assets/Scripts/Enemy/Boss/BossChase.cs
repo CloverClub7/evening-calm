@@ -28,8 +28,6 @@ public class BossChase : ChaseSOBase
         base.DoFrameUpdateLogic();
 
         shootTimer += Time.deltaTime;
-        Debug.Log("Here");
-        Debug.Log(shootTimer);
 
         if (shootTimer > shootInterval)
         {

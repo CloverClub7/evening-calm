@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Checks if one terminal
 public class CheckText : MonoBehaviour
 {
     private bool isOnButton = false;
 
     [SerializeField] GameObject textPrefab;
-    [SerializeField] Texture2D texture;    
+    [SerializeField] Texture2D texture;
 
     [Header("Text")]
     [SerializeField] string boxName;
@@ -20,7 +21,7 @@ public class CheckText : MonoBehaviour
 
     private GameObject textboxGO;
     private bool isTextVisible = false;
-    private Canvas canvas;    
+    private Canvas canvas;
 
     void OnTriggerEnter2D(Collider2D collision)
     {

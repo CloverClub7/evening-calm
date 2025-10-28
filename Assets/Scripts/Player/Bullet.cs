@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+// The bullet that they player shoots
 public class Bullet : MonoBehaviour
 {
     private float limit = 6f;    // Limit distance of bullet

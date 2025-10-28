@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Creates sound objects to play sound, so that if an enemy dies the full sound clip can still be played
 public class SoundFXManager : MonoBehaviour
 {
     public AudioSource soundFXObject;

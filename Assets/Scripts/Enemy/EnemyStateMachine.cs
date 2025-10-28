@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Manages the change of enemy states
 public class EnemyStateMachine
 {
     public EnemyState currentEnemyState;

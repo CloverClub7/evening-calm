@@ -9,12 +9,6 @@ public class EnemyIdleState : EnemyState
 
     }
 
-    public override void AnimationTriggerEvent(EnemyClass.AnimationTriggerType triggerType)
-    {
-        base.AnimationTriggerEvent(triggerType);
-        enemy.idleBaseInstance.DoAnimationTriggerEventLogic(triggerType);
-    }
-
     public override void EnterState()
     {
         base.EnterState();

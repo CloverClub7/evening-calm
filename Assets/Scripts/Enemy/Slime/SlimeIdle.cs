@@ -6,10 +6,6 @@ using UnityEngine;
 public class SlimeIdle : IdleSOBase
 {
     [SerializeField] private float speed = 1f;
-    public override void DoAnimationTriggerEventLogic(EnemyClass.AnimationTriggerType triggerType)
-    {
-        base.DoAnimationTriggerEventLogic(triggerType);
-    }
 
     public override void DoEnterLogic()
     {

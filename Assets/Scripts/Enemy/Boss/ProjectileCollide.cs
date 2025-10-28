@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Projectiles that the boss can shoot
 public class ProjectileCollide : MonoBehaviour
 {
     public float damage = 3f;

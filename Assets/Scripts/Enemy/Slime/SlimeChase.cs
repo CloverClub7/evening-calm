@@ -14,11 +14,6 @@ public class SlimeChase : ChaseSOBase
     private float endChaseTime = 5f;
     
 
-    public override void DoAnimationTriggerEventLogic(EnemyClass.AnimationTriggerType triggerType)
-    {
-        base.DoAnimationTriggerEventLogic(triggerType);
-    }
-
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();

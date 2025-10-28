@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Display a textbox and flip a variable, checked by CheckText and Check2Text
 public class VarText : MonoBehaviour
 {
     public bool isOperating;
@@ -9,7 +10,7 @@ public class VarText : MonoBehaviour
     private bool isOnButton = false;
 
     [SerializeField] GameObject textPrefab;
-    [SerializeField] Texture2D texture;    
+    [SerializeField] Texture2D texture;
 
     [Header("Text")]
     [SerializeField] string boxName;
@@ -17,7 +18,7 @@ public class VarText : MonoBehaviour
 
     private GameObject textboxGO;
     private bool isTextVisible = false;
-    private Canvas canvas;    
+    private Canvas canvas;
 
     void OnTriggerEnter2D(Collider2D collision)
     {

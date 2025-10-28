@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+// The enemy class
+// A lot of states, like the attack and idle states don't do much or are unused
+// There were plans to use them but I had to limit them for time and was able to manage without
 public class EnemyClass : MonoBehaviour
 {
     [Header("Health and Damage")]
@@ -15,7 +18,7 @@ public class EnemyClass : MonoBehaviour
     public Rigidbody2D rigidBody;
     public bool isFacingRight = true;
 
-    public bool isInWater;
+    public bool isInWater = false;
 
     // State machine variables
     public EnemyStateMachine stateMachine;
@@ -111,17 +114,6 @@ public class EnemyClass : MonoBehaviour
         }
     }
 
-    // State machine functions
-    public enum AnimationTriggerType
-    {
-        EnemyDamaged
-    }
-
-    private void AnimationTriggerEvent(AnimationTriggerType triggerType)
-    {
-        stateMachine.currentEnemyState.AnimationTriggerEvent(triggerType);
-    }
-
     // Check distance from player
     public void SetChasing(bool isChasing)
     {
@@ -133,10 +125,12 @@ public class EnemyClass : MonoBehaviour
         this.isInAttackRadius = isAttacking;
     }
 
+    // Tracking entering and exiting water
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 4)
         {
+            Debug.Log("Enemy in water // " + collision.gameObject.name);
             isInWater = true;
             rigidBody.gravityScale /= 5;
         }

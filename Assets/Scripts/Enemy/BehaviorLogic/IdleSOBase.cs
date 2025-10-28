@@ -30,5 +30,4 @@ public class IdleSOBase : ScriptableObject
         }
     }
     public virtual void DoPhysicsLogic() { }
-    public virtual void DoAnimationTriggerEventLogic(EnemyClass.AnimationTriggerType triggerType) { }
 }

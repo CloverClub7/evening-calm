@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.TextCore.Text;
 
+// Text box creation
 public class TextBox : MonoBehaviour
 {
     TextMeshProUGUI boxText;
@@ -22,8 +23,8 @@ public class TextBox : MonoBehaviour
     }
     public void DisplayText(string inputText, string inputName, Texture2D inputAvatar)
     {
-            boxText.text = inputText;
-            boxName.text = inputName;
-            boxAvatar.texture = inputAvatar;
+        boxText.text = inputText;
+        boxName.text = inputName;
+        boxAvatar.texture = inputAvatar;
     }
 }

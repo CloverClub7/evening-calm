@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// At the end of the game, have the player walk all the way right of screen and end
 public class WalkRightTrigger : MonoBehaviour
 {
     private bool isWalking = false;

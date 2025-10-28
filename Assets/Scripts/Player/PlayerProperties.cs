@@ -4,6 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// Keeps track of player health, player inventory, as well as what happens when the player is
+// hit and what happens when the player dies
 public class PlayerProperties : MonoBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
@@ -67,7 +69,7 @@ public class PlayerProperties : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab);
             bullet.transform.position = new Vector3(transform.position.x, transform.position.y - 0.2f, transform.position.z);
         }
-        
+
 
         // Reload the scene (restart) when the death textbox is showing
         if (isTextVisible && Input.GetButtonDown("Space"))
@@ -97,12 +99,12 @@ public class PlayerProperties : MonoBehaviour
         textboxScript.DisplayText(boxText, boxName, texture);
         Time.timeScale = 0;
         isTextVisible = true;
-    }    
-    
+    }
+
     public void PlayerHurt(float damage)
     {
         playerHealth -= damage;
-        
+
         if (playerHealth < 1)
         {
             playerHealth = 0;

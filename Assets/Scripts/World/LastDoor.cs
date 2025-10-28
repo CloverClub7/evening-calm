@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// The final door to be opened before escape
 public class LastDoor : MonoBehaviour
 {
     private bool isOnButton = false;
     private bool openDoor = false;
 
     [SerializeField] GameObject textPrefab;
-    [SerializeField] Texture2D texture;    
+    [SerializeField] Texture2D texture;
 
     [Header("Text")]
     [SerializeField] string boxName;

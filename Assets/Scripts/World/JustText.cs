@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+// Just display a text box
 public class Button : MonoBehaviour
 {
     bool isOnButton = false;

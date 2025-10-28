@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Blocks that can be broken by the player
 public class BreakableBlock : MonoBehaviour
 {
     private float health = 6f;
