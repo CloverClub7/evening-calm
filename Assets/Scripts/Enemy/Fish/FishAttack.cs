@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SlimeAttack", menuName = "Enemy Logic/Attack/Slime Attack")]
-public class SlimeAttack : AttackSOBase
+[CreateAssetMenu(fileName = "FishAttack", menuName = "Enemy Logic/Attack/Fish Attack")]
+public class FishAttack : AttackSOBase
 {
 
     public override void DoEnterLogic()

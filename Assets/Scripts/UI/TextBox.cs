@@ -14,6 +14,7 @@ public class TextBox : MonoBehaviour
     RawImage boxAvatar;
 
     [SerializeField] Texture2D texture;
+    [SerializeField] AudioClip textSound;
 
     void Awake()
     {
@@ -23,6 +24,7 @@ public class TextBox : MonoBehaviour
     }
     public void DisplayText(string inputText, string inputName, Texture2D inputAvatar)
     {
+        SoundFXManager.instance.PlaySoundClip(textSound, transform, 1f);
         boxText.text = inputText;
         boxName.text = inputName;
         boxAvatar.texture = inputAvatar;

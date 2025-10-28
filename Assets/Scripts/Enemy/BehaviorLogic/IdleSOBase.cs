@@ -7,6 +7,7 @@ public class IdleSOBase : ScriptableObject
     protected EnemyClass enemy;
     protected Transform transform;
     protected GameObject gameObject;
+    protected Rigidbody2D rigidbody;
 
     protected Transform playerTransform;
 
@@ -17,6 +18,8 @@ public class IdleSOBase : ScriptableObject
         this.enemy = enemy;
 
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+
+        rigidbody = gameObject.GetComponent<Rigidbody2D>();
     }
 
     public virtual void DoEnterLogic() { }

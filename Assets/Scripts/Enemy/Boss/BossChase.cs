@@ -7,6 +7,7 @@ public class BossChase : ChaseSOBase
 {
     [SerializeField] private float speed = 1f;
     [SerializeField] GameObject projectilePrefab;
+    [SerializeField] AudioClip projectileSound;
     public float shootInterval = 20f;
     private float shootTimer = 0;
 
@@ -46,6 +47,9 @@ public class BossChase : ChaseSOBase
                 projectile.GetComponent<Rigidbody2D>().gravityScale = 0;
                 projectile.GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed;
             }
+
+            // Play sound
+            SoundFXManager.instance.PlaySoundClip(projectileSound, transform, 1f);
         }
     }
 

@@ -403,6 +403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 0}
+  textSound: {fileID: 8300000, guid: c81eddc6307c8a13c8ebc2b5c7a4a9ab, type: 3}
 --- !u!114 &653881867512728721
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SlimeIdle", menuName = "Enemy Logic/Idle/Slime Idle")]
-public class SlimeIdle : IdleSOBase
+[CreateAssetMenu(fileName = "FishIdle", menuName = "Enemy Logic/Idle/Fish Idle")]
+public class FishIdle : IdleSOBase
 {
+    // [SerializeField] private float speed = 2f;
+    // private float directionX;
 
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
+        // directionX = 1;
+        rigidbody.gravityScale = 0;
     }
 
     public override void DoExitLogic()
@@ -20,17 +25,23 @@ public class SlimeIdle : IdleSOBase
     {
         base.DoFrameUpdateLogic();
 
-    }
-
-    public override void DoPhysicsLogic()
-    {
-        base.DoPhysicsLogic();
-
         // Change to chase state if player enters chase radius
         if (enemy.isInChaseRadius)
         {
             enemy.stateMachine.ChangeState(enemy.chaseState);
         }
+
+        // // Move horizontally in idle state
+        // if (enemy.isInWater)
+        // {
+        //     rigidbody.velocity = new Vector2(directionX * speed, rigidbody.velocity.y);
+        //     rigidbody.gravityScale = 0;
+        // }
+    }
+
+    public override void DoPhysicsLogic()
+    {
+        base.DoPhysicsLogic();
     }
 
     public override void Initialize(GameObject gameObject, EnemyClass enemy)
@@ -38,3 +49,4 @@ public class SlimeIdle : IdleSOBase
         base.Initialize(gameObject, enemy);
     }
 }
+

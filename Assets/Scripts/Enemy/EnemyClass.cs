@@ -144,4 +144,6 @@ public class EnemyClass : MonoBehaviour
             rigidBody.gravityScale *= 5;
         }
     }
+
+    virtual public void OnCollisionEnter2D(Collision2D collision) { }
 }

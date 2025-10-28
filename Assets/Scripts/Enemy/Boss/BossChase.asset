@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   projectilePrefab: {fileID: 5527320723039556459, guid: d739c264bac9632d0926911433378782, type: 3}
+  projectileSound: {fileID: 8300000, guid: 50723250ee96f57208e8b14a1177a58a, type: 3}
   shootInterval: 5
   radius: 5
   projectileSpeed: 5

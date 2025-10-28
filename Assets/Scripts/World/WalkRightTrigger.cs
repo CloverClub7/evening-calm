@@ -7,8 +7,9 @@ public class WalkRightTrigger : MonoBehaviour
 {
     private bool isWalking = false;
     float timer = 0f;
-    float delayBeforeEnd = 5f;
+    float delayBeforeEnd = 3f;
     Rigidbody2D playerRb;
+    PlayerProperties playerProperties;
     void OnTriggerEnter2D(Collider2D collide)
     {
         GameObject collidedWith = collide.gameObject;
@@ -16,6 +17,7 @@ public class WalkRightTrigger : MonoBehaviour
         {
             isWalking = true;
             playerRb = collidedWith.GetComponent<Rigidbody2D>();
+            playerProperties = collidedWith.GetComponent<PlayerProperties>();
             Destroy(collidedWith.GetComponent<PlayerMovement>());
         }
     }
@@ -31,7 +33,8 @@ public class WalkRightTrigger : MonoBehaviour
         if (timer > delayBeforeEnd)
         {
             // END GAME
-            Debug.Log("END OF GAME");
+            playerProperties.playerDie("Completed the game! Close the text box to play again",
+                                       "Success!");
         }
     }
 }

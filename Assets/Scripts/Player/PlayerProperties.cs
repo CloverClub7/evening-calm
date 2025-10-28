@@ -71,7 +71,7 @@ public class PlayerProperties : MonoBehaviour
         }
 
 
-        // Reload the scene (restart) when the death textbox is showing
+        // Reload the scene (restart) when the death textbox is showing and input is detected
         if (isTextVisible && Input.GetButtonDown("Space"))
         {
             Time.timeScale = 1;
@@ -94,6 +94,16 @@ public class PlayerProperties : MonoBehaviour
     {
         SoundFXManager.instance.PlaySoundClip(dieSound, transform, 1f);
 
+        textboxGO = Instantiate(textPrefab, canvas.transform);
+        TextBox textboxScript = textboxGO.GetComponent<TextBox>();
+        textboxScript.DisplayText(boxText, boxName, texture);
+        Time.timeScale = 0;
+        isTextVisible = true;
+    }
+
+    // Overloaded function to display text 
+    public void playerDie(string boxText, string boxName)
+    {
         textboxGO = Instantiate(textPrefab, canvas.transform);
         TextBox textboxScript = textboxGO.GetComponent<TextBox>();
         textboxScript.DisplayText(boxText, boxName, texture);
