@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyClass : MonoBehaviour, IEnemyMovement, ITriggerCheck//, IEnemyDamage
+public class EnemyClass : MonoBehaviour
 {
     [Header("Health and Damage")]
     // Damage variables
@@ -12,18 +12,20 @@ public class EnemyClass : MonoBehaviour, IEnemyMovement, ITriggerCheck//, IEnemy
     private float currentHealth;
 
     // Movement variables
-    public Rigidbody2D rigidBody { get; set; }
-    public bool isFacingRight { get; set; }
+    public Rigidbody2D rigidBody;
+    public bool isFacingRight = true;
+
+    public bool isInWater;
 
     // State machine variables
-    public EnemyStateMachine stateMachine { get; set; }
-    public EnemyIdleState idleState { get; set; }
-    public EnemyChaseState chaseState { get; set; }
-    public EnemyAttackState attackState { get; set; }
+    public EnemyStateMachine stateMachine;
+    public EnemyIdleState idleState;
+    public EnemyChaseState chaseState;
+    public EnemyAttackState attackState;
 
     // Trigger check variables
-    public bool isInChaseRadius { get; set; }
-    public bool isInAttackRadius { get; set; }
+    public bool isInChaseRadius;
+    public bool isInAttackRadius;
 
     // ScriptableObject variables
     [Header("Enemy States")]
@@ -31,9 +33,14 @@ public class EnemyClass : MonoBehaviour, IEnemyMovement, ITriggerCheck//, IEnemy
     [SerializeField] private ChaseSOBase chaseBase;
     [SerializeField] private AttackSOBase attackBase;
 
-    public IdleSOBase idleBaseInstance { get; set; }
-    public ChaseSOBase chaseBaseInstance { get; set; }
-    public AttackSOBase attackBaseInstance { get; set; }
+    public IdleSOBase idleBaseInstance;
+    public ChaseSOBase chaseBaseInstance;
+    public AttackSOBase attackBaseInstance;
+
+    // Audio clips
+    [Header("Audio")]
+    [SerializeField] AudioClip damageSound;
+    [SerializeField] AudioClip dieSound;
 
 
     private void Awake()
@@ -72,6 +79,7 @@ public class EnemyClass : MonoBehaviour, IEnemyMovement, ITriggerCheck//, IEnemy
     // Damage functions
     public void Damage(float damageAmount)
     {
+        SoundFXManager.instance.PlaySoundClip(damageSound, transform, 1f);
         currentHealth -= damageAmount;
         if (currentHealth <= 0f)
         {
@@ -81,6 +89,7 @@ public class EnemyClass : MonoBehaviour, IEnemyMovement, ITriggerCheck//, IEnemy
 
     public void Die()
     {
+        SoundFXManager.instance.PlaySoundClip(dieSound, transform, 1f);
         Destroy(gameObject);
     }
 
@@ -124,4 +133,21 @@ public class EnemyClass : MonoBehaviour, IEnemyMovement, ITriggerCheck//, IEnemy
         this.isInAttackRadius = isAttacking;
     }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 4)
+        {
+            isInWater = true;
+            rigidBody.gravityScale /= 5;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 4)
+        {
+            isInWater = false;
+            rigidBody.gravityScale *= 5;
+        }
+    }
 }

@@ -11,11 +11,11 @@ public class PlayerMovement : MonoBehaviour
     private float jumpingPower = 14f;
     public bool isFacingRight = true;
     private bool isInWater = false;
-    private float momentumX = 0f;
 
     [SerializeField] public Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private AudioClip jumpSound;
     Animator animator;
 
     void Start()
@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            rb.velocity = new Vector2(momentumX + horizontal * speed * 0.5f, rb.velocity.y);
+            rb.velocity = new Vector2(horizontal * speed * 0.7f, rb.velocity.y);
         }
 
         // Let the animator know the player is moving
@@ -61,14 +61,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump"))
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower * 0.25f);
-            momentumX = rb.velocity.x / 3;
+            rb.velocity = new Vector2(rb.velocity.x, jumpingPower * 0.33f);
+
+            SoundFXManager.instance.PlaySoundClip(jumpSound, transform, 1f);
         }
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
-            momentumX = rb.velocity.x / 3;
-        }
+
+        
     }
 
     private void Jump()
@@ -76,19 +74,13 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower * 0.5f);
-            momentumX = rb.velocity.x / 2;
-        }
 
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
-            momentumX = rb.velocity.x / 2;
+            SoundFXManager.instance.PlaySoundClip(jumpSound, transform, 1f);
         }
 
         if (rb.velocity.x > 0 && horizontal < 0 || rb.velocity.x < 0 && horizontal > 0)
         {
             rb.velocity = new Vector2(rb.velocity.x + horizontal * 0.5f, rb.velocity.y);
-            momentumX = horizontal * 0.5f;
         }
     }
 
@@ -115,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.layer == 4)
         {
             isInWater = true;
-            rb.gravityScale /= 2;
+            rb.gravityScale /= 5;
         }
     }
 
@@ -124,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.layer == 4)
         {
             isInWater = false;
-            rb.gravityScale *= 2;
+            rb.gravityScale *= 5;
         }
     }
 }

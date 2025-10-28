@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 5312374270892491295}
   - component: {fileID: 7984675159272648142}
   - component: {fileID: 3471387717518007452}
-  - component: {fileID: 3464704716191808452}
+  - component: {fileID: 3976387839382475794}
   - component: {fileID: 8215813424740874343}
   - component: {fileID: 5389068307382248980}
   m_Layer: 8
@@ -166,8 +166,8 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.091247074, y: 0.051186714}
   m_EdgeRadius: 0
---- !u!61 &3464704716191808452
-BoxCollider2D:
+--- !u!70 &3976387839382475794
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -178,7 +178,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 503
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 8
@@ -198,19 +198,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.13, y: 0.09}
-    newSize: {x: 0.13, y: 0.09}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.13, y: 0.09}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.00023510585, y: -0.010581012}
+  m_Size: {x: 0.11057693, y: 0.07093607}
+  m_Direction: 1
 --- !u!50 &8215813424740874343
 Rigidbody2D:
   serializedVersion: 4
@@ -252,9 +242,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   enemyDamage: 2
+  rigidBody: {fileID: 0}
+  isFacingRight: 1
+  isInWater: 0
+  isInChaseRadius: 0
+  isInAttackRadius: 0
   idleBase: {fileID: 11400000, guid: 9ab7b78f74a942412b71886f2e417a0f, type: 2}
   chaseBase: {fileID: 11400000, guid: 9d7456a7b59731276ab4c11d08c5ca2e, type: 2}
   attackBase: {fileID: 11400000, guid: 265a712f3cf731ce98bf3310ef6069c0, type: 2}
+  idleBaseInstance: {fileID: 0}
+  chaseBaseInstance: {fileID: 0}
+  attackBaseInstance: {fileID: 0}
+  damageSound: {fileID: 8300000, guid: b0635423bcd577fe7af11545ca0f6490, type: 3}
+  dieSound: {fileID: 8300000, guid: b0635423bcd577fe7af11545ca0f6490, type: 3}
 --- !u!1 &7095022086803049302
 GameObject:
   m_ObjectHideFlags: 0

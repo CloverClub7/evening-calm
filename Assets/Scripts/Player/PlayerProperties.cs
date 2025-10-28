@@ -7,9 +7,13 @@ using UnityEngine.SceneManagement;
 public class PlayerProperties : MonoBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
-    GameObject healthDisplayGO;
-    HealthDisplay healthDisplay;
 
+    // Audio clips
+    [Header("Sounds")]
+    [SerializeField] AudioClip hurtSound;
+    [SerializeField] AudioClip dieSound;
+
+    // Health related variables
     [Header("Health")]
     public float playerHealth = 5f;
     public float playerMaxHealth = 10f;
@@ -18,6 +22,9 @@ public class PlayerProperties : MonoBehaviour
     private float invincibilityTime = 2f;
     private float invincibilityTimer = 0f;
     private bool isInvincible = false;
+    GameObject healthDisplayGO;
+    HealthDisplay healthDisplay;
+
 
     // Rudimentary inventory
     [Header("Inventory")]
@@ -51,20 +58,23 @@ public class PlayerProperties : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Update player health display
+        healthDisplay.health = playerHealth;
+
         // Fire the pistol if it is in inventory
         if (hasPistol && Input.GetButtonDown("Fire1"))
         {
             GameObject bullet = Instantiate(bulletPrefab);
             bullet.transform.position = new Vector3(transform.position.x, transform.position.y - 0.2f, transform.position.z);
         }
-        healthDisplay.health = playerHealth;
+        
 
         // Reload the scene (restart) when the death textbox is showing
         if (isTextVisible && Input.GetButtonDown("Space"))
         {
             Time.timeScale = 1;
             SceneManager.LoadScene("SampleScene");
-        }       
+        }
 
         // Timer for invincibility
         if (isInvincible)
@@ -75,7 +85,35 @@ public class PlayerProperties : MonoBehaviour
                 isInvincible = false;
                 invincibilityTimer = 0;
             }
-        } 
+        }
+    }
+
+    void playerDie()
+    {
+        SoundFXManager.instance.PlaySoundClip(dieSound, transform, 1f);
+
+        textboxGO = Instantiate(textPrefab, canvas.transform);
+        TextBox textboxScript = textboxGO.GetComponent<TextBox>();
+        textboxScript.DisplayText(boxText, boxName, texture);
+        Time.timeScale = 0;
+        isTextVisible = true;
+    }    
+    
+    public void PlayerHurt(float damage)
+    {
+        playerHealth -= damage;
+        
+        if (playerHealth < 1)
+        {
+            playerHealth = 0;
+            playerDie();
+        }
+        else
+        {
+            SoundFXManager.instance.PlaySoundClip(hurtSound, transform, 1f);
+        }
+
+        isInvincible = true;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -86,14 +124,7 @@ public class PlayerProperties : MonoBehaviour
         if (collidedWith.CompareTag("Enemy") && !isInvincible)
         {
             EnemyClass enemy = collidedWith.GetComponent<EnemyClass>();
-            playerHealth -= enemy.enemyDamage;
-
-            if (playerHealth < 1)
-            {
-                playerDie();
-            }
-
-            isInvincible = true;
+            PlayerHurt(enemy.enemyDamage);
         }
     }
 
@@ -105,23 +136,7 @@ public class PlayerProperties : MonoBehaviour
         if (collidedWith.CompareTag("DangerousObject") && !isInvincible)
         {
             Spike spike = collidedWith.GetComponent<Spike>();
-            playerHealth -= spike.Damage;
-
-            if (playerHealth < 1)
-            {
-                playerDie();
-            }
-
-            isInvincible = true;
+            PlayerHurt(spike.damage);
         }
-    }
-
-    void playerDie()
-    {
-        textboxGO = Instantiate(textPrefab, canvas.transform);
-        TextBox textboxScript = textboxGO.GetComponent<TextBox>();
-        textboxScript.DisplayText(boxText, boxName, texture);
-        Time.timeScale = 0;
-        isTextVisible = true;
     }
 }

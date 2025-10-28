@@ -11,6 +11,8 @@ public class Bullet : MonoBehaviour
     private float velocity;     // Velocity of the bullet
     private float startPositionX;   // The starting position of the bullet
     private PlayerProperties playerProperties; // Pull data from here
+    [SerializeField] AudioClip bulletSound; // Shoot sound
+
     // Set direction of movement for a created bullet
     void Start()
     {
@@ -37,6 +39,8 @@ public class Bullet : MonoBehaviour
         }
 
         rb.velocity = new Vector2(velocity, rb.velocity.y);
+
+        SoundFXManager.instance.PlaySoundClip(bulletSound, transform, 1f);
     }
 
     void Update()
