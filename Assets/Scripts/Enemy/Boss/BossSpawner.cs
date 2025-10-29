@@ -9,6 +9,8 @@ public class BossSpawner : MonoBehaviour
     [SerializeField] GameObject door; // The door to the boss room
     public bool isBossActive = false;
     private GameObject bossItself;
+    private AudioSource audioSource;
+    [SerializeField] AudioClip bossMusic;
 
     public void SpawnBoss()
     {
@@ -16,12 +18,20 @@ public class BossSpawner : MonoBehaviour
         bossItself = Instantiate(bossPrefab, transform);
         isBossActive = true;
 
+        // Play the music
+        audioSource.clip = bossMusic;
+        audioSource.volume = 0.1f;
+        audioSource.Play();
+
         // Disable the door so the player can't just leave
         door.SetActive(false);
     }
 
     public void BossDead()
     {
+        // Stop the music
+        audioSource.Stop();
+
         // Reactivate the door
         door.SetActive(true);
     }
@@ -33,5 +43,10 @@ public class BossSpawner : MonoBehaviour
         {
             BossDead();
         }
+    }
+
+    public void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
     }
 }

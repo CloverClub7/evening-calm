@@ -130,7 +130,6 @@ public class EnemyClass : MonoBehaviour
     {
         if (collision.gameObject.layer == 4)
         {
-            Debug.Log("Enemy in water // " + collision.gameObject.name);
             isInWater = true;
             rigidBody.gravityScale /= 5;
         }
