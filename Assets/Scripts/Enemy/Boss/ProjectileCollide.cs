@@ -12,9 +12,6 @@ public class ProjectileCollide : MonoBehaviour
         {
             collision.gameObject.GetComponent<PlayerProperties>().PlayerHurt(damage);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 }
